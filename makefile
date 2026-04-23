@@ -2,7 +2,8 @@ NAME := minirt
 
 # 색상 정의
 ORIGIN := \033[0m
-BLUE := \033[0;34m
+BLUE := \033[0;34m # 잘 안보이는..?
+GREEN = \033[0;32m
 
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -I include -I lib/minilibx-linux -MMD -MP
@@ -14,6 +15,9 @@ LIBS := -L$(LIBMLX_DIR) -lmlx_Linux -lX11 -lXext -lm # lm은 가장 마지막.
 # 링커는 왼쪽에서 오른쪽 방향으로 읽어감. 이 라이브러리는 고수준->저수준 순으로 추천
 # 고수준(내가 만든) -> 저수준(시스템 표준)
 
+# TODO: VPATH 세팅         VPATH:= src:src/디렉토리명:src/ ...
+# 그전에 디렉토리 분류: print,scene,trace,utils ..?
+
 SRC_DIR := src
 OBJ_DIR := obj
 
@@ -21,12 +25,12 @@ SRC := main.c init.c events.c clean_exit.c render.c
 OBJ := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 DEP := $(OBJ:.o=.d)
 
-
 all: $(NAME)
 
 # 링킹 단계에도 CFLAGS를 포함하는 게 관례라고 함. -> 그동안 여기는 안 썼어서..
 $(NAME): $(MLX_LIB) $(OBJ) 
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
+	@echo "$(GREEN)$(NAME) compiled successfully!$(RESET)"
 
 $(MLX_LIB):
 	@printf "$(BLUE)Checking MLX library...$(ORIGIN)\n"
@@ -45,6 +49,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) -C $(LIBMLX_DIR) clean
+	@echo "$(GREEN) $(NAME) executable removed.$(RESET)"
 
 re: fclean all
 
