@@ -1,0 +1,10 @@
+*.o
+*.d
+obj/
+
+minirt
+
+.DS_Store
+.vscode/
+*.swp
+
