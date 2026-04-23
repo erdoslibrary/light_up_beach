@@ -16,6 +16,8 @@ LIBS := -L$(LIBMLX_DIR) -lmlx_Linux -lX11 -lXext -lm # lm은 가장 마지막.
 # 고수준(내가 만든) -> 저수준(시스템 표준)
 
 # TODO: VPATH 세팅         VPATH:= src:src/디렉토리명:src/ ...
+# 고민: 명시적인 것이 암시적인 것보다 낫다.. 라고 해서, 조금 고민해봐야 할 듯.
+# 우선은 VPATH없이 진행
 # 그전에 디렉토리 분류: print,scene,trace,utils ..?
 
 SRC_DIR := src
