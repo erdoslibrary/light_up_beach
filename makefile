@@ -5,7 +5,7 @@ ORIGIN := \033[0m
 BLUE := \033[0;34m
 
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -I include -I lib/minilibx-linux
+CFLAGS := -Wall -Wextra -Werror -I include -I lib/minilibx-linux -MMD -MP
 LIBMLX_DIR := lib/minilibx-linux
 # MLX_LIB, LIBMLX_DIR 순서가 바뀌면 빌드 안된다. 특히, := 사용 때문.
 # 재료(경로) 먼저 준비하고 요리(결합 변수)
@@ -19,6 +19,8 @@ OBJ_DIR := obj
 
 SRC := main.c init.c events.c clean_exit.c render.c
 OBJ := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+DEP := $(OBJ:.o=.d)
+
 
 all: $(NAME)
 
@@ -45,5 +47,7 @@ fclean: clean
 	@$(MAKE) -C $(LIBMLX_DIR) clean
 
 re: fclean all
+
+-include $(DEP)
 
 .PHONY: all clean fclean re

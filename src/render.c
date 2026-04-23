@@ -10,8 +10,8 @@ void my_pixel_put(int x, int y, t_img *img, int color)
 	offset = (y * img->line_len) + (x * (img->bpp / 8));
 	*(unsigned int *)(img->pixels_ptr + offset) = color;
 }
-// 이 함수로 직접 점을 찍으면, 화면이 매번 갱신되어 깜빡임 현상이
-// 발생하고 매우 느려진다.
+// 이 함수를 사용하지 않고 직접 점을 찍는 코드로 작성하면, 
+// 화면이 매번 갱신되어 깜빡임 현상이 발생하고 매우 느려진다.
 
 void render_minirt(t_data *data) 
 {
