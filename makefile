@@ -1,4 +1,4 @@
-NAME := minirt
+NAME := miniRT
 
 # 색상 정의
 ORIGIN := \033[0m
@@ -23,9 +23,16 @@ LIBS := -L$(LIBMLX_DIR) -lmlx_Linux -lX11 -lXext -lm # lm은 가장 마지막.
 SRC_DIR := src
 OBJ_DIR := obj
 
-SRC := main.c init.c events.c clean_exit.c render.c
-OBJ := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
-DEP := $(OBJ:.o=.d)
+SRCS_NAME := main.c \
+			core/init.c \
+			core/events.c \
+			core/clean_exit.c \
+			core/render.c \
+			
+
+SRCS := $(addprefix $(SRC_DIR)/, $(SRCS_NAME))
+OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS_NAME:.c=.o))
+DEPS := $(OBJS:.o=.d)
 
 all: $(NAME)
 
